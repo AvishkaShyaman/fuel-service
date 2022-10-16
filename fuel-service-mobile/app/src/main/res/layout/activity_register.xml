@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:fillViewport="true"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".register">
 
 
     <RelativeLayout
@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingBottom="24dp"
-                android:text="Fuel Q"
+                android:text="REGISTER"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="32dp"
                 app:drawableTint="#912626"
@@ -36,7 +36,7 @@
                 app:textAllCaps="true" />
 
             <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/editRegisterEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -51,9 +51,22 @@
                 android:layout_height="10dp"
                 app:backgroundTint="#FFFFFF" />
 
+            <EditText
+                android:id="@+id/editRegisterVehicleNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:hint="Vehicle Number" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:backgroundTint="#FFFFFF" />
+
 
             <EditText
-                android:id="@+id/editPassword"
+                android:id="@+id/editRegisterPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -63,7 +76,7 @@
                 android:inputType="textPassword" />
 
             <View
-                android:id="@+id/divider2"
+                android:id="@+id/divider4"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 app:backgroundTint="#FFFFFF" />
