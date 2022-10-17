@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:fillViewport="true"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".register">
+    tools:context=".RegisterActivity">
 
 
     <RelativeLayout
@@ -61,6 +61,84 @@
             <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
+                android:layout_height="30dp"
+                app:backgroundTint="#FFFFFF" />
+
+
+            <TextView
+                android:id="@+id/vehicle_type"
+                android:text="Vehicle Type"
+                android:textSize="20dp"
+                app:drawableTint="#912626"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                app:lineHeight="30px" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/bike"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Bike"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/car"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Car"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="20sp" />
+
+
+                <RadioButton
+                    android:id="@+id/van"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="Van"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="20sp" />
+
+
+                <RadioButton
+                    android:id="@+id/threeWheel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Three Wheel"
+                    android:textSize="20sp" />
+
+
+                <RadioButton
+                    android:id="@+id/other"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:padding="4dp"
+                    android:text="other"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="20sp" />
+
+            </RadioGroup>
+
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
                 android:layout_height="10dp"
                 app:backgroundTint="#FFFFFF" />
 
@@ -76,26 +154,18 @@
                 android:inputType="textPassword" />
 
             <View
-                android:id="@+id/divider4"
+                android:id="@+id/divider5"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 app:backgroundTint="#FFFFFF" />
 
             <Button
-                android:id="@+id/btnSignIn"
+                android:id="@+id/btnRegisterView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SIGN IN"
+                android:text="Register"
                 android:textStyle="bold"
                 app:backgroundTint="#000000" />
-
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Register Now"
-                android:textColor="#FF192133"
-                app:backgroundTint="#FFFFFF" />
 
         </LinearLayout>
 

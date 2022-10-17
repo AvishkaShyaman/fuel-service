@@ -22,14 +22,11 @@ const login = async (req, res) => {
     const token = await getToken(user._id);
 
     res.status(200).json({
-      success: true,
-      data: {
-        id: user.id,
-        name: user.name,
-        email,
-        role: user.role,
-        token,
-      },
+      id: user.id,
+      name: user.name,
+      email,
+      role: user.role,
+      token,
     });
   } catch (error) {
     res.status(500).json({
