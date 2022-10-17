@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema(
   {
@@ -15,11 +15,11 @@ const UserSchema = mongoose.Schema(
     role: {
       type: String,
     },
-    pushToken: {
-      type: String,
-    },
-    data: {},
+    vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    visitedSheds: [
+      { type: mongoose.Schema.Types.ObjectId, required: false, ref: "sheds" },
+    ],
   },
   { timestamps: true }
 );
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model("users", UserSchema);
