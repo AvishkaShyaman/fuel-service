@@ -9,6 +9,7 @@ module.exports = (app, express) => {
     getSingleShed,
     addFuelToShedStart,
     addFuelToShedEnd,
+    getShedQueue
   } = require("../controllers/sheds.controller");
   
   //create shed with shed name
@@ -22,6 +23,9 @@ module.exports = (app, express) => {
 
   //get all sheds
   router.get("/shed/getAll", getAllSheds);
+
+  //get queue by fule type of a single shed
+  router.get("/shed-queue/:shedId", getShedQueue);
 
   //get single shed
   router.get("/shed/:shedId", getSingleShed);

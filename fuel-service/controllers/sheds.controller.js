@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const Shed = require("../models/sheds.model");
+const ObjectId = require("mongodb").ObjectId;
 
 const addShed = async (req, res) => {
   try {
@@ -96,7 +97,7 @@ const getAllSheds = async (req, res) => {
 
     let findQuery = {};
     if (name) {
-      findQuery = { name: { $regex: name } }
+      findQuery = { name: { $regex: name } };
     }
     const allSheds = await Shed.find(findQuery);
 
@@ -119,6 +120,63 @@ const getSingleShed = async (req, res) => {
     res.status(200).json({
       success: true,
       singShed,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const getQueues = async ({ shedId, fuelType = "all", present = "" }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const singShed = await Shed.findById(shedId);
+
+      const allQueue = singShed.queue;
+      let selectedQueue = [];
+
+      if (allQueue?.length) {
+        if (fuelType === "all") {
+          selectedQueue = allQueue;
+        } else {
+          allQueue.forEach((queue) => {
+            if (queue.fuelType === fuelType) {
+              selectedQueue.push(queue);
+            }
+          });
+        }
+      }
+
+      let queues = selectedQueue;
+
+      if (present === "true") {
+        queues = [];
+        selectedQueue.forEach((queue) => {
+          if (queue.depatureTime !== null) {
+            queues.push(queue);
+          }
+        });
+      }
+
+      resolve(queues);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const getShedQueue = async (req, res) => {
+  try {
+    const { shedId } = req.params;
+    const { fuelType = "all", present = "" } = req.query;
+
+    const queues = await getQueues({ shedId, fuelType, present });
+
+    res.status(200).json({
+      success: true,
+      queue: queues,
     });
   } catch (err) {
     res.status(500).json({
@@ -185,4 +243,5 @@ module.exports = {
   getSingleShed,
   addFuelToShedStart,
   addFuelToShedEnd,
+  getShedQueue,
 };
