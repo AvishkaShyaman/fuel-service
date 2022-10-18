@@ -1,9 +1,8 @@
 let jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require('../models/user.model');
+const User = require("../models/user.model");
 
-
-const getToken = (id) => {
+const getToken = id => {
   return new Promise(async (resolve, reject) => {
     try {
       // Generate Token
@@ -72,7 +71,7 @@ const isAuthorised = async (req, res, next) => {
   }
 };
 
-const verifyToken = (token) => {
+const verifyToken = token => {
   return new Promise(async (resolve, reject) => {
     try {
       let tokenDetails = Buffer.from(token, "binary").toString();
