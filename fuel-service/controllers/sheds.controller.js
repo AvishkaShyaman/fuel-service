@@ -92,7 +92,13 @@ const userExitFromQue = async (req, res) => {
 
 const getAllSheds = async (req, res) => {
   try {
-    const allSheds = await Shed.find();
+    const { name } = req.query;
+
+    let findQuery = {};
+    if (name) {
+      findQuery = { name: { $regex: name } }
+    }
+    const allSheds = await Shed.find(findQuery);
 
     res.status(200).json({
       success: true,
