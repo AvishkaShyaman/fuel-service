@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/user.model");
-const Vehicle = require("../models/vehicle.model");
-const { getToken } = require("../services/auth");
+const bcrypt = require('bcrypt');
+const User = require('../models/user.model');
+const Vehicle = require('../models/vehicle.model');
+const { getToken } = require('../services/auth');
 
 const login = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ status: false, message: "Invalid Email" });
+      return res.status(401).json({ status: false, message: 'Invalid Email' });
     }
 
     const match = await bcrypt.compare(password, user.password);
@@ -17,7 +17,7 @@ const login = async (req, res) => {
     if (!match) {
       return res
         .status(401)
-        .json({ status: false, message: "Invalid Password" });
+        .json({ status: false, message: 'Invalid Password' });
     }
 
     const token = await getToken(user._id);
@@ -49,7 +49,7 @@ const signUp = async (req, res) => {
     if (!email && !password && !name) {
       res.status(400).json({
         success: false,
-        data: { message: "Plese inclue email, password and name"},
+        data: { message: 'Plese inclue email, password and name' },
       });
       return;
     }
@@ -85,8 +85,11 @@ const signUp = async (req, res) => {
     }
 
     res.status(200).json({
-      success: true,
-      data: { user, vehicle },
+      id: user.id,
+      name: user.name,
+      email,
+      role: user.role,
+      token,
     });
   } catch (error) {
     res.status(500).json({
