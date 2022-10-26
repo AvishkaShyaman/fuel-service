@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#000000"
         android:minHeight="?attr/actionBarSize"
         app:title="Modara Shed"
         app:titleTextColor="@color/white"

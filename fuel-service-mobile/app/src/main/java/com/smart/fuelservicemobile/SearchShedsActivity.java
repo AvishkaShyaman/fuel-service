@@ -1,18 +1,29 @@
 package com.smart.fuelservicemobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.smart.fuelservicemobile.API.APIClient;
+import com.smart.fuelservicemobile.API.APIInterface;
+import com.smart.fuelservicemobile.Models.SearchShedRequest;
+import com.smart.fuelservicemobile.Models.SearchShedResponse;
+import com.smart.fuelservicemobile.Models.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchShedsActivity extends AppCompatActivity {
 
@@ -20,6 +31,7 @@ public class SearchShedsActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String > adapter;
+    APIInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +40,17 @@ public class SearchShedsActivity extends AppCompatActivity {
 
         searchView = (SearchView) findViewById(R.id.searchShed);
         listView = (ListView) findViewById(R.id.shedList);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+
+        Gson gson = new Gson();
+
+        // search event handler
+        String user = mPrefs.getString("user", "");
+        User getU  = gson.fromJson(user, User.class);
 
         list = new ArrayList<>();
         HashMap<String, String> listMap = new HashMap<String, String>();
-        listMap.put("1", "Kotahena Shed IOC");
-        listMap.put("2", "Maradana Shed");
-        listMap.put("3", "Modara Shed");
-
-        list.addAll(listMap.values());
-
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,6 +73,27 @@ public class SearchShedsActivity extends AppCompatActivity {
                 if(listMap.containsValue(query)){
 
                     adapter.getFilter().filter(query);
+
+
+                    SearchShedRequest shedSearchRequest = new SearchShedRequest(query, getU.getId());
+                    Call<SearchShedResponse> call1 = apiInterface.searchShed(shedSearchRequest);
+                    call1.enqueue(new Callback<SearchShedResponse>() {
+
+                        @Override
+                        public void onResponse(Call<SearchShedResponse> call, Response<SearchShedResponse> response) {
+                            list = new ArrayList<>();
+                            HashMap<String, String> listMap = new HashMap<String, String>();
+
+                            list.addAll(listMap.values());
+
+                            listView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onFailure(Call<SearchShedResponse> call, Throwable t) {
+
+                        }
+                    });
                 }
                 return false;
             }
