@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +14,6 @@ import android.widget.RadioGroup;
 import com.google.gson.Gson;
 import com.smart.fuelservicemobile.API.APIClient;
 import com.smart.fuelservicemobile.API.APIInterface;
-import com.smart.fuelservicemobile.Models.LoginRequest;
 import com.smart.fuelservicemobile.Models.RegisterRequest;
 import com.smart.fuelservicemobile.Models.User;
 
@@ -53,28 +51,28 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                RadioButton radioButton = (RadioButton) findViewById(grpId);
-//                String vehicleType=radioButton.getText().toString();
+                RadioButton radioButton = (RadioButton) findViewById(grpId);
+                String vehicleType=radioButton.getText().toString();
 
-//                if (email.getText().toString().trim().isEmpty()) {
-//                    email.setError("Email field can not be blank");
-//                    return;
-//                }
-//
-//                if (password.getText().toString().trim().isEmpty()) {
-//                    password.setError("Password field can not be blank");
-//                    return;
-//                }
-//
-//                if (name.getText().toString().trim().isEmpty()) {
-//                    name.setError("Name field can not be blank");
-//                    return;
-//                }
-//
-//                if (vehicleNo.getText().toString().trim().isEmpty()) {
-//                    vehicleNo.setError("vehicle No field can not be blank");
-//                    return;
-//                }
+                if (email.getText().toString().trim().isEmpty()) {
+                    email.setError("Email field can not be blank");
+                    return;
+                }
+
+                if (password.getText().toString().trim().isEmpty()) {
+                    password.setError("Password field can not be blank");
+                    return;
+                }
+
+                if (name.getText().toString().trim().isEmpty()) {
+                    name.setError("Name field can not be blank");
+                    return;
+                }
+
+                if (vehicleNo.getText().toString().trim().isEmpty()) {
+                    vehicleNo.setError("vehicle No field can not be blank");
+                    return;
+                }
 
                 RegisterRequest registerRequest = new RegisterRequest(email.getText().toString(), password.getText().toString(), vehicleNo.getText().toString(), "sd", name.getText().toString());
                 Call<User> call1 = apiInterface.signup(registerRequest);
@@ -82,8 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         User user = response.body();
-
-
 
                         SharedPreferences.Editor prefsEditor = mPrefs.edit();
                         Gson gson = new Gson();

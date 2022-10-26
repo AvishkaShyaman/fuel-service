@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FuelServiceMobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MyShedActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShedActivity"
             android:exported="false" />
         <activity

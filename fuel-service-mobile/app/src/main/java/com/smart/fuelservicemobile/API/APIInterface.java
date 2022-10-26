@@ -2,6 +2,7 @@ package com.smart.fuelservicemobile.API;
 
 import com.smart.fuelservicemobile.Models.LoginRequest;
 import com.smart.fuelservicemobile.Models.RegisterRequest;
+import com.smart.fuelservicemobile.Models.SearchShedResponse;
 import com.smart.fuelservicemobile.Models.User;
 
 import retrofit2.Call;
@@ -19,11 +20,11 @@ public interface APIInterface {
     @POST("signup")
     Call<User> signup(@Body RegisterRequest user);
 
-//
-//    @POST("searchShed")
-//    Call<User> signup(@Body RegisterRequest user);
-//
-//
+
+    @POST("searchShed/:shedId/:userId")
+    Call<SearchShedResponse> searchShed(@Body RegisterRequest user);
+
+
 //    @POST("getShed")
 //    Call<User> signup(@Body RegisterRequest user);
 //

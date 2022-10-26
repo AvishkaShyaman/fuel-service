@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SearchShedsActivity.class);
+                Intent intent = new Intent(MainActivity.this, MyShedActivity.class);
                 startActivity(intent);
 
 //                if (email.getText().toString().trim().isEmpty()) {
