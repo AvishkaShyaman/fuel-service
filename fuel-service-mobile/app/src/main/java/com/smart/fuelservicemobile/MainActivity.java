@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Login event handler
+                /********************************************************
+                 Description: Login User / Shed Owned
+                 Request: {  email, password }
+                 Response: user details
+                 ********************************************************/
                 LoginRequest loginRequest = new LoginRequest(email.getText().toString(), password.getText().toString());
                 Call<User> call1 = apiInterface.login(loginRequest);
                 call1.enqueue(new Callback<User>() {

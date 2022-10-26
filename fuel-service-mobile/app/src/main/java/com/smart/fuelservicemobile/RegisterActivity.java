@@ -74,6 +74,13 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+
+                /********************************************************
+                 Description: Register User
+                 Request: {  shed name }
+                 Response: shedDetails
+                 ********************************************************/
+
                 RegisterRequest registerRequest = new RegisterRequest(email.getText().toString(), password.getText().toString(), vehicleNo.getText().toString(), "sd", name.getText().toString());
                 Call<User> call1 = apiInterface.signup(registerRequest);
                 call1.enqueue(new Callback<User>() {

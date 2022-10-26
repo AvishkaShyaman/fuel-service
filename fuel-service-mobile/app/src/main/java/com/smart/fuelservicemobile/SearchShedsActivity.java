@@ -45,7 +45,11 @@ public class SearchShedsActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
 
-        // search event handler
+        /********************************************************
+         Description: Search Shed Request
+         Request: {  shed name }
+         Response: shedDetails
+         ********************************************************/
         String user = mPrefs.getString("user", "");
         User getU  = gson.fromJson(user, User.class);
 

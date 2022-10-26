@@ -39,7 +39,11 @@ public class ShedActivity extends AppCompatActivity {
         Gson gson = new Gson();
 
 
-        // Get Shed By id
+        /********************************************************
+         Description: get Shed by Request
+         Request: {  shed id }
+         Response: shedDetails
+         ********************************************************/
         String user = mPrefs.getString("user", "");
         User getU  = gson.fromJson(user, User.class);
 
