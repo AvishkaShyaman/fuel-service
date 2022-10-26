@@ -61,8 +61,11 @@ const signUp = async (req, res) => {
     const user = await newUser.save();
 
     res.status(200).json({
-      success: true,
-      data: user,
+      id: user.id,
+      name: user.name,
+      email,
+      role: user.role,
+      token,
     });
   } catch (error) {
     res.status(500).json({

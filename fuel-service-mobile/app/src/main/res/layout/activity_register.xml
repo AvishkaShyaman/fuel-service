@@ -35,6 +35,24 @@
                 app:lineHeight="30px"
                 app:textAllCaps="true" />
 
+
+            <EditText
+                android:id="@+id/editUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="sans-serif-light"
+                android:hint="Name"
+                />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                app:backgroundTint="#FFFFFF" />
+
+
             <EditText
                 android:id="@+id/editRegisterEmail"
                 android:layout_width="match_parent"
@@ -45,8 +63,9 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
 
+
             <View
-                android:id="@+id/divider1"
+                android:id="@+id/divider6"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 app:backgroundTint="#FFFFFF" />
@@ -76,7 +95,7 @@
                 app:lineHeight="30px" />
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/vehicleGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

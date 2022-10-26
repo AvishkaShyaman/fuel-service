@@ -1,9 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SearchShedsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="#65C6B0B0"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@color/black"
+        tools:ignore="MissingConstraints"></androidx.appcompat.widget.Toolbar>
+
+
+    <SearchView
+        android:id="@+id/searchShed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="8dp"
+        android:iconifiedByDefault="false"
+        android:textColor="@color/black"
+        app:titleTextColor="@color/black"
+        android:queryHint="Search Sheds Here" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shedList"
+        android:divider="#673AB7"
+        android:dividerHeight="2dp"
+        android:layout_below="@+id/searchShed"/>
+
+
+
+</RelativeLayout>
