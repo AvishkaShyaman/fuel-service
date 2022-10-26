@@ -19,6 +19,10 @@ public class User {
         return token;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getRole() {
         return role;
     }

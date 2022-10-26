@@ -43,52 +43,53 @@ public class MainActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(MainActivity.this, SearchShedsActivity.class);
                 startActivity(intent);
 
-//                if (email.getText().toString().trim().isEmpty()) {
-//                    email.setError("Email field can not be blank");
-//                    return;
-//                }
-//
-//                if (password.getText().toString().trim().isEmpty()) {
-//                    password.setError("Password field can not be blank");
-//                    return;
-//                }
-//
-//                // Login event handler
-//                LoginRequest loginRequest = new LoginRequest(email.getText().toString(), password.getText().toString());
-//                Call<User> call1 = apiInterface.login(loginRequest);
-//                call1.enqueue(new Callback<User>() {
-//                    @Override
-//                    public void onResponse(Call<User> call, Response<User> response) {
-//                        User user = response.body();
-//
-//                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//                        Gson gson = new Gson();
-//                        String json = gson.toJson(user);
-//                        prefsEditor.putString("user", json);
-//                        prefsEditor.commit();
-//
-//                        if (user.getRole().equals("Admin")) {
-//
-//                        } else {
-//                            Intent intent = new Intent(MainActivity.this, SearchShedsActivity.class);
-//                            startActivity(intent);
-//                        }
-//
-//
-//
-////                        String abc = mPrefs.getString("user", "");
-////                        User getU  = gson.fromJson(abc, User.class);
-////                        Log.d("abc", getU.getToken());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<User> call, Throwable t) {
-//                        call.cancel();
-//                    }
-//                });
+                if (email.getText().toString().trim().isEmpty()) {
+                    email.setError("Email field can not be blank");
+                    return;
+                }
+
+                if (password.getText().toString().trim().isEmpty()) {
+                    password.setError("Password field can not be blank");
+                    return;
+                }
+
+                /********************************************************
+                 Description: Login User / Shed Owned
+                 Request: {  email, password }
+                 Response: user details
+                 ********************************************************/
+                LoginRequest loginRequest = new LoginRequest(email.getText().toString(), password.getText().toString());
+                Call<User> call1 = apiInterface.login(loginRequest);
+                call1.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        User user = response.body();
+
+                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        prefsEditor.putString("user", json);
+                        prefsEditor.commit();
+
+                        if (user.getRole().equals("Admin")) {
+                            Intent intent = new Intent(MainActivity.this, MyShedActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, SearchShedsActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        call.cancel();
+                    }
+                });
             }
         });
 
