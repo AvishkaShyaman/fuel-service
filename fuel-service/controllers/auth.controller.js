@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user.model');
+const Vehicle = require('../models/vehicle.model');
 const { getToken } = require('../services/auth');
 
 const login = async (req, res) => {
@@ -22,11 +23,14 @@ const login = async (req, res) => {
     const token = await getToken(user._id);
 
     res.status(200).json({
-      id: user.id,
-      name: user.name,
-      email,
-      role: user.role,
-      token,
+      success: true,
+      data: {
+        id: user.id,
+        name: user.name,
+        email,
+        role: user.role,
+        token,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -39,8 +43,16 @@ const login = async (req, res) => {
 const signUp = async (req, res) => {
   try {
     const {
-      body: { email, password, name, role },
+      body: { email, password, name, role, regirsterNumber, type, fuleType },
     } = req;
+
+    if (!email && !password && !name) {
+      res.status(400).json({
+        success: false,
+        data: { message: 'Plese inclue email, password and name' },
+      });
+      return;
+    }
 
     const isUserExist = await User.findOne({ email });
 
@@ -59,6 +71,18 @@ const signUp = async (req, res) => {
     });
 
     const user = await newUser.save();
+
+    let vehicle = {};
+    if (user && regirsterNumber && type && fuleType) {
+      const newVehicle = new Vehicle({
+        regirsterNumber,
+        type,
+        fuleType,
+        ownerId: user.id,
+      });
+
+      vehicle = await newVehicle.save();
+    }
 
     res.status(200).json({
       id: user.id,
