@@ -6,6 +6,7 @@ import com.smart.fuelservicemobile.Models.LoginRequest;
 import com.smart.fuelservicemobile.Models.RegisterRequest;
 import com.smart.fuelservicemobile.Models.SearchShedRequest;
 import com.smart.fuelservicemobile.Models.SearchShedResponse;
+import com.smart.fuelservicemobile.Models.DataWrapper;
 import com.smart.fuelservicemobile.Models.User;
 import com.smart.fuelservicemobile.Models.getAdminShedRequest;
 import com.smart.fuelservicemobile.Models.getAdminShedResponse;
@@ -20,12 +21,12 @@ public interface APIInterface {
 
     //* ============= AUTH  ============= *//
 
-    @POST("login")
+    @POST("user/login")
     Call<User> login(@Body LoginRequest user);
 
 
     @POST("signup")
-    Call<User> signup(@Body RegisterRequest user);
+    Call<DataWrapper> signup(@Body RegisterRequest user);
 
     //* ============= AUTH  ============= *//
 
