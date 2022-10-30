@@ -1,29 +1,57 @@
 package com.smart.fuelservicemobile.Models;
 
-public class User {
-    String id;
-    String name;
-    String email;
-    String token;;
-    String role;
+import java.util.ArrayList;
 
-    public User(String email, String name, String token, String role) {
-        this.id = email;
-        this.name = name;
-        this.email = email;
-        this.token = token;
-        this.role = role;
-    }
+public class User extends DataWrapper {
+    private String id;
+    private String name;
+    private String email;
+    private String password;
+    private String role;
+    ArrayList<Object> visitedSheds = new ArrayList<Object>();
 
-    public String getToken() {
-        return token;
-    }
+
+    // Getter Methods
 
     public String getId() {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public String getRole() {
         return role;
+    }
+
+    // Setter Methods
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

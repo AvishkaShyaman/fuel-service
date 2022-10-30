@@ -2,7 +2,6 @@ package com.smart.fuelservicemobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +11,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.google.gson.Gson;
-import com.smart.fuelservicemobile.API.APIClient;
 import com.smart.fuelservicemobile.API.APIInterface;
 import com.smart.fuelservicemobile.Models.RegisterRequest;
-import com.smart.fuelservicemobile.Models.User;
+import com.smart.fuelservicemobile.Models.DataWrapper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        apiInterface = APIClient.getClient().create(APIInterface.class);
 
         SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
 
@@ -76,35 +73,35 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 /********************************************************
-                 Description: Register User
+                 Description: Register User.java
                  Request: {  shed name }
                  Response: shedDetails
                  ********************************************************/
 
                 RegisterRequest registerRequest = new RegisterRequest(email.getText().toString(), password.getText().toString(), vehicleNo.getText().toString(), "sd", name.getText().toString());
-                Call<User> call1 = apiInterface.signup(registerRequest);
-                call1.enqueue(new Callback<User>() {
+                Call<DataWrapper> call1 = apiInterface.signup(registerRequest);
+                call1.enqueue(new Callback<DataWrapper>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        User user = response.body();
+                    public void onResponse(Call<DataWrapper> call, Response<DataWrapper> response) {
+                        DataWrapper dataWrapper = response.body();
 
                         SharedPreferences.Editor prefsEditor = mPrefs.edit();
                         Gson gson = new Gson();
-                        String json = gson.toJson(user);
+                        String json = gson.toJson(dataWrapper);
                         prefsEditor.putString("user", json);
                         prefsEditor.commit();
 
-                        if (user.getRole().equals("Admin")) {
-
-                        } else {
-                            Intent intent = new Intent(RegisterActivity.this, SearchShedsActivity.class);
-                            startActivity(intent);
-                        }
+//                        if (dataWrapper.getRole().equals("Admin")) {
+//
+//                        } else {
+//                            Intent intent = new Intent(RegisterActivity.this, SearchShedsActivity.class);
+//                            startActivity(intent);
+//                        }
 
                     }
 
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                    public void onFailure(Call<DataWrapper> call, Throwable t) {
                         call.cancel();
                     }
                 });
