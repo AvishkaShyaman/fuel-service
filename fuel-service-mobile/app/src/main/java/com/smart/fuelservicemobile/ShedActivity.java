@@ -41,12 +41,12 @@ public class ShedActivity extends AppCompatActivity {
         SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
 
 
-        Log.i("mPref", String.valueOf(mPrefs));
+//        Log.i("mPref", String.valueOf(mPrefs));
 
-        String id = mPrefs.getString("userId", null);
+        String id = mPrefs.getString("userId", "63584715f368e3c9c60cff9c");
 
-
-        Log.i("mPref", id);
+//
+//        Log.i("mPref", id);
 
         String shedId = getIntent().getStringExtra("id");
 
@@ -91,7 +91,7 @@ public class ShedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                joinLeftQueue(true, false, shedId, id);
+                joinLeftQueue(false, true, shedId, id);
             }
         });
 
@@ -99,6 +99,9 @@ public class ShedActivity extends AppCompatActivity {
 
 
     private void joinLeftQueue(Boolean join, Boolean exit,String shedId, String userId) {
+
+        joinQueueBtn=(Button)findViewById(R.id.joinQueue);
+        leftQueueBtn=(Button)findViewById(R.id.leftQueue);
 
         RequestQueue queue = Volley.newRequestQueue(ShedActivity.this);
         JSONObject params = new JSONObject();
@@ -121,6 +124,26 @@ public class ShedActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.i("res", String.valueOf(response));
+
+                    getFuelData();
+
+                    if (join) {
+                        joinQueueBtn.setVisibility(View.INVISIBLE);
+                        leftQueueBtn.setVisibility(View.VISIBLE);
+                    }
+
+                    if (exit) {
+                        leftQueueBtn.setVisibility(View.INVISIBLE);
+                        joinQueueBtn.setVisibility(View.VISIBLE);
+                    }
+
+                    if (selected == "petrol") {
+                        setData("petrol");
+                    } else {
+                        setData("diesel");
+                    }
+
+
 
                 } catch ( Exception e) {
                     Toast.makeText(ShedActivity.this, "QUEUE JOIN OR EXIT Failed", Toast.LENGTH_LONG).show();
@@ -161,7 +184,7 @@ public class ShedActivity extends AppCompatActivity {
 
                     apiResponse = response;
 
-                    setData("petrol");
+                    setData(selected);
 
 
                 } catch (Exception e) {
