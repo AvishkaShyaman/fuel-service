@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
                             Log.i("user", response.getJSONObject("data").toString());
 
+                            String id = mPrefs.getString("userId", "63584715f368e3c9c60cff9c");
+                            Log.i("userId", id);
+
+
 
                             if(response.getJSONObject("data").getString("role").equals("admin")){
                                 startActivity(new Intent(MainActivity.this, MyShedActivity.class));

@@ -24,9 +24,9 @@ public class MyShedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_shed);
 
-        String data = getIntent().getStringExtra("id");
+        String userId = getIntent().getStringExtra("id");
 
-        Log.i("user Id", data);
+        Log.i("user Id", userId);
 
         SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
 

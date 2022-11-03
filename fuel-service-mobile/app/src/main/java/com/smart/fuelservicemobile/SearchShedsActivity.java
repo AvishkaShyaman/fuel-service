@@ -49,7 +49,7 @@ public class SearchShedsActivity extends AppCompatActivity {
                 String value = String.valueOf(id);
 
                 Intent intent = new Intent(SearchShedsActivity.this, ShedActivity.class);
-                intent.putExtra("id", value);
+                intent.putExtra("id", "63582d930ad19da429815c4f");
                 startActivity(intent);
             }
         });
