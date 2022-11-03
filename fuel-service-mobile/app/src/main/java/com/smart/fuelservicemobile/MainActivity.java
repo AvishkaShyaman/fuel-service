@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
                             String id = mPrefs.getString("userId", "63584715f368e3c9c60cff9c");
                             Log.i("userId", id);
 
-
-
                             if(response.getJSONObject("data").getString("role").equals("admin")){
-                                startActivity(new Intent(MainActivity.this, MyShedActivity.class));
+                                Intent intent = new Intent(MainActivity.this, MyShedActivity.class);
+                                intent.putExtra("id", userId);
+                                startActivity(intent);
                             }else{
                                 startActivity(new Intent(MainActivity.this, SearchShedsActivity.class));
                             }
